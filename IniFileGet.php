@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,15 +18,22 @@
  * <http://phing.info>.
  */
 
-namespace Phing\Task\Ext;
+namespace Phing\Task\Ext\IniFile;
 
 /**
- * Class for collecting details for removing keys or sections from an ini file
+ * InifileGet
  *
- * @author   Ken Guest <kguest@php.net>
+ * @author   Ken Guest <ken@linux.ie>
  */
-class IniFileRemove
+class IniFileGet
 {
+    /**
+     * Default
+     *
+     * @var string
+     */
+    protected $default = '';
+
     /**
      * Property
      *
@@ -41,23 +49,57 @@ class IniFileRemove
     protected $section;
 
     /**
-     * Set Section name
+     * Output property name
      *
-     * @param string $section Name of section in ini file
-     *
-     * @return void
+     * @var string
      */
-    public function setSection(string $section): void
+    protected $output;
+
+
+    /**
+     * Set the default value, for if key or section is not present in .ini file
+     *
+     * @param string $default Default value
+     */
+    public function setDefault(string $default): void
     {
-        $this->section = $section;
+        $this->default = trim($default);
     }
 
     /**
-     * Set Property/Key name
+     * Get the default value, for if key or section is not present in .ini file
      *
-     * @param string $property ini key name
+     * @return string
+     */
+    public function getDefault(): string
+    {
+        return $this->default;
+    }
+
+    /**
+     * Set Section name
      *
-     * @return void
+     * @param string $section Name of section in ini file
+     */
+    public function setSection(string $section): void
+    {
+        $this->section = trim($section);
+    }
+
+    /**
+     * Get Section
+     *
+     * @return string
+     */
+    public function getSection(): ?string
+    {
+        return $this->section;
+    }
+
+    /**
+     * Set Property
+     *
+     * @param string $property property/key name
      */
     public function setProperty(string $property): void
     {
@@ -75,12 +117,22 @@ class IniFileRemove
     }
 
     /**
-     * Get Section
+     * Set name of property to set retrieved value to
+     *
+     * @param string $output Name of property to set with retrieved value
+     */
+    public function setOutputProperty(string $output): void
+    {
+        $this->output = $output;
+    }
+
+    /**
+     * Get name of property to set retrieved value to
      *
      * @return string
      */
-    public function getSection(): ?string
+    public function getOutputProperty(): ?string
     {
-        return $this->section;
+        return $this->output;
     }
 }

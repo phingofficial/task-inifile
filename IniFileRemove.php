@@ -1,4 +1,5 @@
 <?php
+
 /**
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -17,22 +18,15 @@
  * <http://phing.info>.
  */
 
-namespace Phing\Task\Ext;
+namespace Phing\Task\Ext\IniFile;
 
 /**
- * InifileGet
+ * Class for collecting details for removing keys or sections from an ini file
  *
- * @author   Ken Guest <ken@linux.ie>
+ * @author   Ken Guest <kguest@php.net>
  */
-class IniFileGet
+class IniFileRemove
 {
-    /**
-     * Default
-     *
-     * @var string
-     */
-    protected $default = '';
-
     /**
      * Property
      *
@@ -48,57 +42,23 @@ class IniFileGet
     protected $section;
 
     /**
-     * Output property name
-     *
-     * @var string
-     */
-    protected $output;
-
-
-    /**
-     * Set the default value, for if key or section is not present in .ini file
-     *
-     * @param string $default Default value
-     */
-    public function setDefault(string $default): void
-    {
-        $this->default = trim($default);
-    }
-
-    /**
-     * Get the default value, for if key or section is not present in .ini file
-     *
-     * @return string
-     */
-    public function getDefault(): string
-    {
-        return $this->default;
-    }
-
-    /**
      * Set Section name
      *
      * @param string $section Name of section in ini file
+     *
+     * @return void
      */
     public function setSection(string $section): void
     {
-        $this->section = trim($section);
+        $this->section = $section;
     }
 
     /**
-     * Get Section
+     * Set Property/Key name
      *
-     * @return string
-     */
-    public function getSection(): ?string
-    {
-        return $this->section;
-    }
-
-    /**
-     * Set Property
+     * @param string $property ini key name
      *
-     * @param string $property property/key name
+     * @return void
      */
     public function setProperty(string $property): void
     {
@@ -116,22 +76,12 @@ class IniFileGet
     }
 
     /**
-     * Set name of property to set retrieved value to
-     *
-     * @param string $output Name of property to set with retrieved value
-     */
-    public function setOutputProperty(string $output): void
-    {
-        $this->output = $output;
-    }
-
-    /**
-     * Get name of property to set retrieved value to
+     * Get Section
      *
      * @return string
      */
-    public function getOutputProperty(): ?string
+    public function getSection(): ?string
     {
-        return $this->output;
+        return $this->section;
     }
 }
